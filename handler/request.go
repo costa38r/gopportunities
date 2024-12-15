@@ -44,3 +44,24 @@ func (r *CreateOpeningRequest) Validate() error {
 
 	return nil
 }
+
+type UpadateOpeningRequest struct {
+	Role     string `json:"role"`
+	Company  string `json:"company"`
+	Location string `json:"location"`
+	Remote   *bool  `json:"remote"`
+	Link     string `json:"link"`
+	Salaray  int64  `json:"salary"`
+}
+
+func (r *UpadateOpeningRequest) Validate() error {
+	//if any field is provided, validation is truthy
+
+	if r.Role != "" || r.Company != "" || r.Location != "" || r.Remote != nil || r.Link != "" || r.Salaray > 0 {
+		return nil
+	}
+
+	// if none of the fields were provided
+	return fmt.Errorf("at least one field must be provided")
+
+}
